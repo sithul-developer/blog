@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Save</button>
-                                    <button class="btn btn-success"><a href="{{ url('list') }}"style="color:white"> Back</a></button>
+                                    <button class="btn btn-success"><a href="{{ url('category') }}"style="color:white"> Back</a></button>
                                 </div>
                             </form>
                         </div>
