@@ -1,156 +1,215 @@
-@extends('home.layout.app')
-@section('content')
-    <style>
-        .title {
-            text-decoration: initial;
-            padding: 0;
-            color: #2c2d2f;
-            font-family: Roboto, Battambang, sans-serif;
-            font-weight: regular;
-            font-size: 14px;
-            line-height: 30px;
-            scroll-behavior: smooth;
+<!DOCTYPE html>
+<html lang="en">
 
-        }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Blog Home - Start Bootstrap Template</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{{ url('./asset_/css/styles.css') }} " rel="stylesheet" />
+</head>
 
-        .title .sub_ttile {
-
-            color: #818181;
-            overflow: hidden;
-            line-height: 29px;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            ...
-        }
-
-        #title {
-            text-decoration: initial;
-            font-weight: bold;
-            padding: 0;
-            font-family: Roboto, Battambang, sans-serif;
-            font-weight: regular;
-            font-size: 26px;
-            line-height: 41px;
-            scroll-behavior: smooth;
-        }
-
-        #sub_title {
-            line-height: 35px;
-            font-size: 16px;
-            font-weight: 800px;
-            scroll-behavior: smooth;
-            padding-top: 10px;
-            line-height: 30px;
-            color: #818181;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            ...
-        }
-
-
-
-
-
-        .title h2 {
-            line-height: 35px;
-            font-size: 18px;
-            font-weight: bold;
-            scroll-behavior: smooth;
-
-            line-height: 29px;
-            color: #2e2e2f;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            ...
-        }
-    </style>
-    <div class="row m-0">
-        <!-- Nested row for non-featured blog posts-->
-        <div class="col-md-4">
-            x
-        </div>
-
-        <div class="col-lg-8 card ">
-
-            <ul class="nav  p-2 mb-4" style="border-bottom:1px solid #e0dbdb;">
-                @foreach ($navbar_categories as $navbar_category)
-                <li class="nav-item"><a class="nav-link" href=" {{ route('home',['category_id' =>$navbar_category->id])}} ">{{$navbar_category->category_name}} </a></li>
-                @endforeach
-
-            </ul>
-            <div class="row  p-3">
-                @foreach ($posts as $value)
-                    @if (!empty($value->status == 0 ? $value->Is_deleted == 0 : ''))
-                        <!-- Blog post -->
-                        <div class="card mb-3 ">
-                            <div class="row g-0">
-                                <div class="col-md-4" style="padding: 15px 0 15px 1px;">
-                                    <a href="{{ route('Article', ['id' => $value->id]) }}"><img class="card-img-top"
-                                            src=" {{ $value->getImage() }} " alt="..." style="height:180px" /></a>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-
-                                        <a href=" {{ route('Article', ['id' => $value->id]) }}" class="title">
-                                            <h2 class="card-title h4">{{ $value->title }} </h2>
-                                            <p class="card-text sub_ttile">{{ $value->sub_title }} </p>
-                                            <div class="small text-muted"> {{ $value->created_at }} </div>
-                                         {{--    <a class="btn btn-primary"
-                                                href="{{ route('Article', ['id' => $value->id]) }}">Read
-                                                more →</a> --}}
-                                    </div>
-                                </div>
-                            </div>
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid ">
+            <a class="navbar-brand" href="#!">Start Bootstrap</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    <li class="nav-item">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                user
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#" style="display: flex;"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px" width="20"
+                                            height="20" fill="currentColor" class="bi bi-box-arrow-in-right"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 5.996V14H3s-1 0-1-1 1-4 6-4c.564 0 1.077.038 1.544.107a4.524 4.524 0 0 0-.803.918A10.46 10.46 0 0 0 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h5ZM9 13a1 1 0 0 1 1-1v-1a2 2 0 1 1 4 0v1a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2Zm3-3a1 1 0 0 0-1 1v1h2v-1a1 1 0 0 0-1-1Z" />
+                                        </svg>login</a>
+                                    <a class="dropdown-item" href="{{ url('logout') }}" style="display: flex;"><svg
+                                            xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px" width="20"
+                                            height="20" fill="currentColor" class="bi bi-box-arrow-in-left"
+                                            viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z" />
+                                            <path fill-rule="evenodd"
+                                                d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
+                                        </svg>logout</a>
+                                </li>
+                            </ul>
                         </div>
-                    @endif
-                @endforeach
-                {{--      @foreach ($posts as $value)
-                    @if (!empty($value->status == 0 ? $value->Is_deleted == 0 : ''))
-                        <div class="col-lg-12">
-                            <div class="row card  p-0">
-                                <div class="col-lg-4">
-                                    <a href="{{ route('Article', ['id' => $value->id]) }}"><img class="card-img-top"
-                                            src=" {{ $value->getImage() }} " alt="..." style="height:180px" /></a>
-                                </div>
-                                <div class="col-lg-8">
-                                    <div class="card-body">
+                    </li>
 
-                                        <a href=" {{ route('Article', ['id' => $value->id]) }}" class="title">
-                                            <h2 class="card-title h4">{{ $value->title }} </h2>
-                                            <p class="card-text sub_ttile">{{ $value->sub_title }} </p>
-                                            <div class="small text-muted"> {{ $value->created_at }} </div>
-                                            <a class="btn btn-primary"
-                                                href="{{ route('Article', ['id' => $value->id]) }}">Read
-                                                more →</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    @endif
-                @endforeach --}}
-
-
-        </div>
-
-
-
-    </div>
-
-    <nav aria-label="Pagination">
-        <hr class="my-0" />
-        <div class="card-footer mt-4">
-            {{ $posts->links('pagination::bootstrap-5') }}
+                </ul>
+            </div>
         </div>
     </nav>
-    <!-- Pagination-->
+    <!-- Page header with logo and tagline-->
+    <header class="py-5 bg-light border-bottom mb-4">
+        <div class="container">
+            <div class="text-center my-5">
+                <h1 class="fw-bolder">Welcome to Blog Home!</h1>
+                <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+            </div>
+        </div>
+    </header>
+    <!-- Page content-->
+    <div class="container">
+        <div class="row">
+            <!-- Blog entries-->
+            <div class="col-lg-8">
+                <!-- Featured blog post-->
+                <div class="card mb-4">
+                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
+                            alt="..." /></a>
+                    <div class="card-body">
+                        <div class="small text-muted">January 1, 2023</div>
+                        <h2 class="card-title">Featured Post Title</h2>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
+                            aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi
+                            vero voluptate voluptatibus possimus, veniam magni quis!</p>
+                        <a class="btn btn-primary" href="#!">Read more →</a>
+                    </div>
+                </div>
+                <!-- Nested row for non-featured blog posts-->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!-- Blog post-->
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top"
+                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">January 1, 2023</div>
+                                <h2 class="card-title h4">Post Title</h2>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Reiciendis aliquid atque, nulla.</p>
+                                <a class="btn btn-primary" href="#!">Read more →</a>
+                            </div>
+                        </div>
+                        <!-- Blog post-->
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top"
+                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">January 1, 2023</div>
+                                <h2 class="card-title h4">Post Title</h2>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Reiciendis aliquid atque, nulla.</p>
+                                <a class="btn btn-primary" href="#!">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Blog post-->
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top"
+                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">January 1, 2023</div>
+                                <h2 class="card-title h4">Post Title</h2>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Reiciendis aliquid atque, nulla.</p>
+                                <a class="btn btn-primary" href="#!">Read more →</a>
+                            </div>
+                        </div>
+                        <!-- Blog post-->
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top"
+                                    src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">January 1, 2023</div>
+                                <h2 class="card-title h4">Post Title</h2>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
+                                <a class="btn btn-primary" href="#!">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination-->
+                <nav aria-label="Pagination">
+                    <hr class="my-0" />
+                    <ul class="pagination justify-content-center my-4">
+                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+                                aria-disabled="true">Newer</a></li>
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">15</a></li>
+                        <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <!-- Search widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Search</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Enter search term..."
+                                aria-label="Enter search term..." aria-describedby="button-search" />
+                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Categories</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">Web Design</a></li>
+                                    <li><a href="#!">HTML</a></li>
+                                    <li><a href="#!">Freebies</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">JavaScript</a></li>
+                                    <li><a href="#!">CSS</a></li>
+                                    <li><a href="#!">Tutorials</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Side Widget</div>
+                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
+                        use, and feature the Bootstrap 5 card component!</div>
+                </div>
+            </div>
+        </div>
     </div>
-@endsection
+    <!-- Footer-->
+    <footer class="py-3 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src=" {{ url('./asset_/js/scripts.js') }} "></script>
+</body>
+
+</html>

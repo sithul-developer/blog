@@ -4,12 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title> {{!empty($header_title) ? $header_title : ''}}  | Blog</title>
-
-
-{{--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script> --}}
-
+    <title>AdminLTE 3 | Dashboard</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -36,11 +32,11 @@
     <div class="wrapper">
 
         <!-- Preloader -->
-      <div class="preloader flex-column justify-content-center align-items-center">
+     {{--    <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ url('./asset/dist/img/AdminLTELogo.png')}} " alt="AdminLTELogo" height="60"
                 width="60">
         </div>
-
+ --}}
         <!-- Navbar -->
         @include('admin.layout.header')
         <!-- /.navbar -->
@@ -52,17 +48,17 @@
         @include('admin.layout.footer')
 
         <!-- Control Sidebar -->
-     {{--    <aside class="control-sidebar control-sidebar-dark">
+        <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
-        </aside> --}}
+        </aside>
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="{{url('../asset/plugins/jquery/jquery.min.js')}}"></script>
+    <script src="{{url('./asset/plugins/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="{{url('./asset/plugins/jquery-ui/jquery-ui.min.js')}} "></script>
+    <script src="{{url('asset/plugins/jquery-ui/jquery-ui.min.js')}} "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
@@ -70,9 +66,9 @@
     <!-- Bootstrap 4 -->
     <script src="{{url('./asset/plugins/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
     <!-- ChartJS -->
-    <script src="{{url('./asset/plugins/chart.js/Chart.min.js')}} "></script>
+    <script src="{{url('asset/plugins/chart.js/Chart.min.js')}} "></script>
     <!-- Sparkline -->
- {{--    <script src="{{url('asset/plugins/sparklines/sparkline.js')}} "></script> --}}
+    <script src="{{url('asset/plugins/sparklines/sparkline.js')}} "></script>
     <!-- JQVMap -->
     <script src="{{url('./asset/plugins/jqvmap/jquery.vmap.min.js')}} "></script>
     <script src="{{url('./asset/plugins/jqvmap/maps/jquery.vmap.usa.js')}} "></script>
@@ -92,7 +88,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{url('./asset/dist/js/demo.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    {{-- <script src="{{url('./asset/dist/js/pages/dashboard.js')}}"></script> --}}
+    <script src="{{url('./asset/dist/js/pages/dashboard.js')}}"></script>
 </body>
 
 </html>

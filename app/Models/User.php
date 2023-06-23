@@ -19,25 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'last_name',
         'email',
         'password',
-        'dashboard',
-        'category',
-        'tag',
-        'slider',
-        'post',
-        'footer',
-        'preview',
-        'gallery',
-        'setting',
-        'status',
-        'description',
-        'phone_number',
-        'image',
-        'confirm_password',
-        'Is_deleted',
-        'is_admin',
     ];
 
     /**
@@ -59,18 +42,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-    public function  getImage()
-    {
-        if (!empty($this->image && file_exists('media/' .$this->image))) {
-            return url('media/' .$this->image);
-        } else {
-            return "";
-        }
-    }
 }

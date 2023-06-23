@@ -13,10 +13,10 @@ class AuthController extends Controller
         if (!empty(Auth::check()) && Auth::user()->is_admin == 1) {
             return redirect('admin/dashboard');
 
-        }  elseif (!empty(Auth::check()) && Auth::user()->is_admin == 0) {
+        }/*  elseif (!empty(Auth::check()) && Auth::user()->is_admin == 0) {
 
             return redirect('/');
-        }
+        } */
         return  view('admin.auth.login');
     }
     public function auth_login(Request $request)
@@ -24,12 +24,10 @@ class AuthController extends Controller
         $remember = !empty($request->remember) ? true : false;
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_admin' => 1], $remember)) {
             return redirect('admin/dashboard');
-        }  elseif (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_admin' => 0], $remember)) {
+        } elseif (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'is_admin' => 0], $remember)) {
 
-            return redirect('admin/dashboard');
-        }
-
-        else {
+            return redirect('/');
+        } else {
             return redirect()->back()->with('error', 'please enter  email and password');
         }
     }
